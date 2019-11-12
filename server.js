@@ -140,12 +140,14 @@ function generateFakeForecast(location) {
  */
 function getForecast(req, resp) {
   const location = req.params.location || '40.7720232,-73.9732319';
-  const url = `${BASE_URL}/${API_KEY}/${location}`;
+  const cors = 'https://cors-anywhere.herokuapp.com/'
+  const url = `${cors}/${BASE_URL}/${API_KEY}/${location}`;
   fetch(url).then((resp) => {
     if (resp.status !== 200) {
       throw new Error(resp.statusText);
     }
-    return resp.json();
+    console.log(resp)
+    // return resp.json();
   }).then((data) => {
     setTimeout(() => {
       resp.json(data);
